@@ -2,3 +2,4 @@ torchvision
 h5py
 numpy
 Pillow
+apu
