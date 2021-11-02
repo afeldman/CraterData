@@ -104,7 +104,7 @@ class MoonCraterDataset(VisionDataset):
         """
         for fentry in self.file_list:
             md5, filename = fentry[0], fentry[1]
-            if not check_integrity(self.root / filename, md5):
+            if not check_integrity(self.root/filename, md5):
                 return False
         return True
 
