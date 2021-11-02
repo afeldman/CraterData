@@ -63,7 +63,7 @@ class MoonCraterDataset(VisionDataset):
         Return:
             int: number of samples
         """
-        return len(self.data_file["/image"].shape[0])
+        return self.data_file["image"].shape[0]
 
     
     def __getitem__(self, index: int) -> Tuple[Any, Any, Any]:
