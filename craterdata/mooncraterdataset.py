@@ -1,7 +1,8 @@
 """ download data and create toutch dataset """
 from typing import (Tuple, Any, List, Optional, Callable)
 
-
+import logging
+import coloredlogs
 import h5py as h5
 import json
 
@@ -18,6 +19,8 @@ class MoonCraterDataset(VisionDataset):
         Learning with craters. This module will make the data available
     """
 
+    logger = logging.getLogger(__name__)
+
     url='https://zenodo.org/record/5563001/files/'
     file_list = [
         ("9aa79078ec762aaabe524107e55f5328", "moon_data.h5"),
@@ -30,26 +33,31 @@ class MoonCraterDataset(VisionDataset):
         transform: Optional[Callable] = None,
         target_transform: Optional[Callable] = None,
         download: bool = False,
+        loglevel: str = "DEBUG"
     ) -> None:
         super().__init__(
             root, transform=transform, target_transform=target_transform
         )
+
+        coloredlogs.install(level=loglevel, logger=self.logger)
 
         self.root = Path(self.root)
         self.root.mkdir(exist_ok=True)
 
         # if you want to download the data
         if download:
+            self.logger.info("start download")
             self.download()
 
         # the data is not available
         if not self._check_integrity():
-            raise RuntimeError("Dataset not found or corrupted." + " You can use download=True to download it")
+            raise RuntimeError("Dataset not found or corrupted. \n You can use download=True to download it")
 
         self.data_file = h5.File(self.root / "moon_data.h5", mode="r")
         self.crater_info = None
 
         with open(self.root / "data_rec.json", "r", encoding="utf8") as jsonfile:
+            self.logger.info("read crater info")
             # the data is a list
             crater_data = tuple(json.load(jsonfile))
             # more easy access to the data information. 
@@ -104,7 +112,8 @@ class MoonCraterDataset(VisionDataset):
         """
         for fentry in self.file_list:
             md5, filename = fentry[0], fentry[1]
-            if not check_integrity(self.root/filename, md5):
+            self.logger.debug(f"check file {filename} with md5 hash {md5}")
+            if not check_integrity(fpath=self.root/filename, md5=md5):
                 return False
         return True
 
@@ -115,10 +124,11 @@ class MoonCraterDataset(VisionDataset):
         # carefull, this can take a while, because the
         # md5 validation
         if self._check_integrity():
-            print("Files already downloaded and verified")
+            self.logger.info("Files already downloaded and verified")
             return
 
         # the download
         for fentry in self.file_list:
             file_name = fentry[1]
+            self.logger.warn("start download url")
             download_url(f"{self.url}/{file_name}", str(self.root), filename=file_name, md5=fentry[0])
