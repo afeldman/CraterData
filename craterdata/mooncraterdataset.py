@@ -46,7 +46,7 @@ class MoonCraterDataset(VisionDataset):
         if not self._check_integrity():
             raise RuntimeError("Dataset not found or corrupted." + " You can use download=True to download it")
 
-        self.data_file = h5.File(self.root/"moon_data.h5")
+        self.data_file = h5.File(self.root / "moon_data.h5", mode="r")
         self.crater_info = None
 
         with open(self.root / "data_rec.json", "r", encoding="utf8") as jsonfile:
@@ -63,13 +63,12 @@ class MoonCraterDataset(VisionDataset):
         Return:
             int: number of samples
         """
-        return self.data_file["image"].shape[0]
+        return self.data_file["/image"].shape[0]
 
     
     def __getitem__(self, index: int) -> Tuple[Any, Any, Any]:
         """ get the sample of index
-        
-        
+                
         Args:
             index (int): index of the next element
 
