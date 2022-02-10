@@ -4,12 +4,9 @@ import os
 
 # Third party
 from setuptools import find_packages, setup
-from apu.setup import setversion, Module
+from apu.setup import Module
 
 project_name="craterdata"
-
-setversion(os.path.abspath(os.path.dirname(__file__)),
-           f'{project_name}/__init__.py')
 
 from craterdata import __author__, __version__, __email__
 
