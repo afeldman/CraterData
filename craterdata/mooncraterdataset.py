@@ -8,7 +8,6 @@ import json
 
 from pathlib import Path
 from PIL import Image
-import numpy as np
 
 from torchvision.datasets import VisionDataset
 from torchvision.datasets.utils import (check_integrity, download_url)
