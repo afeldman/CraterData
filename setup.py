@@ -4,7 +4,6 @@ import os
 
 # Third party
 from setuptools import find_packages, setup
-from apu.setup import Module
 
 project_name="craterdata"
 
@@ -24,5 +23,12 @@ setup(
         'Source': 'https://github.com/afeldman/CraterData.git',
         'Tracker': 'https://github.com/afeldman/CraterData/issues'
     },
-    install_requires=Module.load_requirements("requirements.txt"),
+    install_requires=[
+        "torchvision",
+        "h5py",
+        "numpy",
+        "Pillow",
+        "coloredlogs",
+        "fire"
+    ],
 )
