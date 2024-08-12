@@ -1,6 +1,0 @@
-torchvision
-h5py
-numpy
-Pillow
-coloredlogs
-fire

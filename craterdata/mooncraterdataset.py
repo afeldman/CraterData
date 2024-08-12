@@ -1,5 +1,5 @@
 """ download data and create toutch dataset """
-from typing import (Tuple, Any, List, Optional, Callable)
+from typing import (Tuple, Any, Optional, Callable)
 
 import logging
 import coloredlogs
@@ -20,7 +20,7 @@ class MoonCraterDataset(VisionDataset):
 
     logger = logging.getLogger(__name__)
 
-    url='https://zenodo.org/record/5563001/files/'
+    url='https://zenodo.org/records/5563001/files'
     file_list = [
         ("9aa79078ec762aaabe524107e55f5328", "moon_data.h5"),
         ("066c1c44c046ae1e9722987f88edc062", "data_rec.json"),
