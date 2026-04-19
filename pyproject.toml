@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "craterdata"
+version = "0.2.0"
+description = "PyTorch datasets for crater analysis"
+readme = "README.md"
+authors = [
+    { name = "Anton Feldmann", email = "anton.feldmann@gmail.com" }
+]
+license = { text = "Apache 2.0" }
+requires-python = ">=3.11"
+dependencies = [
+    "torch>=2.1",
+    "h5py>=3.16.0",
+    "numpy>=1.24.0",
+    "Pillow>=10.0.0",
+    "torchvision>=0.16.0",
+    "coloredlogs>=15.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=24.0.0",
+    "ruff>=0.1.0",
+]
+
+[tool.setuptools]
+packages = ["craterdata"]
+package-dir = { "" = "." }
