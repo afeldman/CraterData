@@ -1,0 +1,6 @@
+torch
+torchvision
+h5py>=3.10
+numpy
+Pillow
+coloredlogs
