@@ -16,7 +16,7 @@ dependencies = [
     "torch>=2.1",
     "h5py>=3.16.0",
     "numpy>=1.24.0",
-    "Pillow>=10.0.0",
+    "Pillow>=12.3.0",
     "torchvision>=0.16.0",
     "coloredlogs>=15.0.0",
 ]
